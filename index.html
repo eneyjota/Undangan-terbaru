@@ -3,177 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wedding of Dadan & Minah</title>
+    <title>Undangan Dadan & Minah</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #DCC69A; --dark: #1A1A1A; --beige: #F4F1EE; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--beige); color: var(--dark); overflow: hidden; margin: 0; }
-        h1, h2, h3, .serif { font-family: 'Bodoni Moda', serif; }
+        :root { --gold: #DCC69A; --dark: #1A1A1A; }
+        body { font-family: 'Montserrat', sans-serif; margin: 0; background: #F4F1EE; }
+        h1, h2, .serif { font-family: 'Bodoni Moda', serif; }
 
-        /* COVER OVERLAY - HARUS MUNCUL PERTAMA KALI */
-        #cover {
+        /* COVER YANG MENUTUPI LAYAR */
+        #cover-layar {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--dark); color: var(--gold);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 10000; transition: transform 1.2s ease-in-out;
-            text-align: center; padding: 20px;
+            z-index: 9999; text-align: center; transition: 1s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
-        .btn-open { 
-            margin-top: 30px; padding: 15px 40px; border: 2px solid var(--gold); 
-            background: var(--gold); color: var(--dark); cursor: pointer;
-            text-transform: uppercase; letter-spacing: 4px; font-size: 12px;
-            font-weight: bold; border-radius: 4px; transition: 0.3s;
+        /* TOMBOL BUKA */
+        .tombol-buka {
+            margin-top: 40px; padding: 15px 40px; background: var(--gold); color: #000;
+            border: none; font-weight: bold; letter-spacing: 2px; cursor: pointer;
+            text-transform: uppercase; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .btn-open:hover { background: transparent; color: var(--gold); }
 
-        /* CONTENT UTILS */
-        .timer-box { background: var(--dark); color: var(--gold); padding: 15px; border-radius: 8px; min-width: 80px; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        #music-btn { position: fixed; bottom: 20px; left: 20px; z-index: 1000; background: var(--dark); color: var(--gold); border: 1px solid var(--gold); border-radius: 50%; width: 50px; height: 50px; cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 20px; }
+        /* MAPS */
+        .bingkai-map { border: 2px solid var(--gold); width: 100%; max-width: 700px; margin: 0 auto; }
         
-        /* GOOGLE MAPS STYLING */
-        .map-container { width: 100%; max-width: 800px; margin: 0 auto; border: 1px solid var(--gold); overflow: hidden; }
-        .map-responsive { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .map-responsive iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        /* MUSIK */
+        #btn-musik { position: fixed; bottom: 20px; left: 20px; z-index: 100; background: var(--dark); color: var(--gold); width: 50px; height: 50px; border-radius: 50%; display: none; border: 1px solid var(--gold); cursor: pointer; }
     </style>
 </head>
-<body>
-
-    <div id="cover">
-        <p class="uppercase tracking-[0.6em] text-[10px] mb-8 opacity-70">Wedding Invitation</p>
-        <h1 class="text-6xl md:text-8xl italic font-bold mb-4">Dadan & Minah</h1>
-        
-        <div class="my-10">
-            <p class="text-[10px] italic mb-3 opacity-60">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
-            <h3 id="guestNameCover" class="text-2xl serif italic font-bold tracking-widest">[ Nama Tamu ]</h3>
-        </div>
-
-        <button class="btn-open" onclick="openInvitation()">Buka Undangan</button>
+<body class="overflow-hidden"> <div id="cover-layar">
+        <p class="uppercase tracking-[0.4em] text-xs mb-4">The Wedding of</p>
+        <h1 class="text-6xl italic font-bold mb-2">Dadan & Minah</h1>
+        <div class="h-[1px] w-20 bg-[#DCC69A] my-6"></div>
+        <p class="text-sm italic mb-1">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+        <h3 id="nama-tamu" class="text-2xl serif font-bold">[ Nama Tamu ]</h3>
+        <button class="tombol-buka" onclick="bukaSekarang()">Buka Undangan</button>
     </div>
 
-    <audio id="bgMusic" loop>
+    <audio id="lagu" loop>
         <source src="musik-wedding.mp3" type="audio/mpeg">
     </audio>
-    <button id="music-btn" onclick="toggleMusic()">⏸</button>
+    <button id="btn-musik" onclick="aturMusik()">⏸</button>
 
-    <main id="main-content">
-        <section class="h-screen flex flex-col justify-center items-center text-center px-6 bg-[#1A1A1A] text-[#DCC69A]">
-            <p class="uppercase tracking-[0.6em] text-[10px] mb-8 opacity-80">Official Invitation</p>
-            <h1 class="text-7xl md:text-[10rem] mb-6 italic font-bold leading-none">D & M</h1>
-            <p class="serif text-2xl tracking-[0.4em] uppercase">Dadan & Minah</p>
-            <div class="h-[1px] w-20 bg-[#DCC69A] mx-auto my-10"></div>
-            <p class="text-sm tracking-widest font-light italic opacity-80">Minggu, 05 April 2026</p>
+    <main id="konten" class="opacity-0 transition-opacity duration-1000">
+        
+        <section class="min-h-screen bg-[#1A1A1A] text-[#DCC69A] flex flex-col justify-center items-center text-center p-6">
+            <h1 class="text-9xl font-bold italic">D & M</h1>
+            <p class="text-2xl uppercase tracking-widest mt-4">Dadan & Minah</p>
+            <p class="mt-10 italic">Minggu, 05 April 2026</p>
         </section>
 
-        <section class="py-24 bg-white text-center reveal px-4">
-            <h2 class="serif text-3xl mb-12 italic">Menuju Hari Bahagia</h2>
-            <div class="flex justify-center gap-4 md:gap-8 flex-wrap">
-                <div class="timer-box"><span id="days" class="block text-3xl font-bold">00</span><span class="text-[10px] uppercase">Hari</span></div>
-                <div class="timer-box"><span id="hours" class="block text-3xl font-bold">00</span><span class="text-[10px] uppercase">Jam</span></div>
-                <div class="timer-box"><span id="minutes" class="block text-3xl font-bold">00</span><span class="text-[10px] uppercase">Menit</span></div>
-                <div class="timer-box"><span id="seconds" class="block text-3xl font-bold">00</span><span class="text-[10px] uppercase">Detik</span></div>
-            </div>
-        </section>
-
-        <section class="py-32 bg-[#F4F1EE] px-6 text-center">
-            <div class="max-w-4xl mx-auto space-y-32">
-                <div class="reveal">
-                    <h2 class="text-5xl md:text-7xl serif italic font-bold mb-4">Ahmad Ramadani</h2>
-                    <p class="font-bold text-sm tracking-[0.5em] mb-4 uppercase opacity-60">( Dadan )</p>
-                    <p class="text-sm">Putra Kedua dari <br> <b>Bapak Nanang Supiansyah & Ibu Jaminah</b></p>
+        <section class="py-20 px-6 bg-white text-center">
+            <h2 class="text-4xl serif italic mb-10">Lokasi & Waktu</h2>
+            
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 text-left mb-16">
+                <div class="border-l-4 border-[#DCC69A] pl-6 p-4 bg-[#F4F1EE]">
+                    <h3 class="font-bold text-xl mb-2">Akad Nikah</h3>
+                    <p class="text-sm">Rabu, 11 Maret 2026</p>
+                    <p class="text-sm font-bold">Desa Semisir, Kotabaru</p>
                 </div>
-                <div class="reveal">
-                    <h2 class="text-5xl md:text-7xl serif italic font-bold mb-4">Siti Aminah</h2>
-                    <p class="font-bold text-sm tracking-[0.5em] mb-4 uppercase opacity-60">( Minah )</p>
-                    <p class="text-sm">Putri Terakhir dari <br> <b>Bapak Yanto (Alm) & Ibu St. Hapsah</b></p>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-32 bg-[#1A1A1A] text-[#DCC69A] px-6">
-            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 reveal mb-20">
-                <div class="border-l border-[#DCC69A] pl-8">
-                    <h3 class="serif text-4xl mb-6 italic">Akad Nikah</h3>
-                    <p class="font-bold">Rabu, 11 Maret 2026</p>
-                    <p class="text-sm mb-4">08.00 WITA – Selesai</p>
-                    <p class="text-[10px] uppercase opacity-70">Jl. Poros Desa Semisir, Kotabaru, Kalsel</p>
-                </div>
-                <div class="border-l border-[#DCC69A] pl-8">
-                    <h3 class="serif text-4xl mb-6 italic">Resepsi</h3>
-                    <p class="font-bold">Minggu, 05 April 2026</p>
-                    <p class="text-sm mb-4">08.00 WITA – Selesai</p>
-                    <p class="text-[10px] uppercase opacity-70">Kediaman Mempelai Wanita, Desa Semisir</p>
+                <div class="border-l-4 border-[#DCC69A] pl-6 p-4 bg-[#F4F1EE]">
+                    <h3 class="font-bold text-xl mb-2">Resepsi</h3>
+                    <p class="text-sm">Minggu, 05 April 2026</p>
+                    <p class="text-sm font-bold">Kediaman Mempelai Wanita</p>
                 </div>
             </div>
 
-            <div class="reveal pt-10">
-                <h3 class="serif text-center text-3xl mb-10 italic">Lokasi Acara</h3>
-                <div class="map-container">
-                    <div class="map-responsive">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15933.743141679004!2d116.1436577!3d-3.2410537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dee9566d9bdefa9%3A0x75c356545a90ea9b!2sSemisir%2C%20Pulau%20Laut%20Tengah%2C%20Kotabaru%20Regency%2C%20South%20Kalimantan!5e0!3m2!1sen!2sid!4v1711510000000!5m2!1sen!2sid" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-                <div class="text-center mt-8">
-                    <a href="https://maps.app.goo.gl/ChIJqw-92XTr6C0RO-qQWvRWw3U" target="_blank" class="inline-block py-4 px-10 border border-[#DCC69A] text-[10px] uppercase tracking-widest hover:bg-[#DCC69A] hover:text-black transition">Buka Navigasi</a>
-                </div>
+            <div class="bingkai-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.565860361596!2d116.1413809!3d-3.6858172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dee23f7970d49ab%3A0x75c356545a90eb3b!2sSemisir%2C%20Kec.%20Pulau%20Laut%20Tengah%2C%20Kabupaten%20Kotabaru%2C%20Kalimantan%20Selatan!5e0!3m2!1sid!2sid!4v1711510000000!5m2!1sid!2sid" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
+            <a href="https://maps.app.goo.gl/9ZpP46p6K8gXJ7A" target="_blank" class="inline-block mt-6 px-8 py-3 bg-black text-white text-xs uppercase tracking-widest">Petunjuk Jalan Ke Semisir</a>
         </section>
 
-        <section class="py-40 bg-white px-6 text-center reveal">
-            <h2 class="serif text-5xl md:text-7xl mb-6 italic font-bold">Terima Kasih</h2>
-            <p class="serif text-xl tracking-[0.3em] uppercase opacity-60 mb-10">Dadan & Minah</p>
-            <a href="https://wa.me/6285787806145?text=Hadir" target="_blank" class="inline-block py-5 px-12 bg-[#1A1A1A] text-[#DCC69A] text-[10px] font-bold uppercase tracking-[0.3em]">Konfirmasi Kehadiran</a>
+        <section class="py-32 bg-[#F4F1EE] text-center">
+            <h2 class="text-6xl serif italic mb-6">Terima Kasih</h2>
+            <p class="opacity-70 italic max-w-lg mx-auto mb-10 px-6">Kehadiran dan doa restu Anda adalah kado terindah bagi kami.</p>
+            <p class="text-xl font-bold uppercase tracking-widest">Dadan & Minah</p>
         </section>
+
     </main>
 
     <script>
-        // Fungsi Buka Undangan
-        function openInvitation() {
-            document.getElementById('cover').style.transform = 'translateY(-100%)';
-            document.body.style.overflow = 'auto'; // Mengizinkan scroll kembali
-            const music = document.getElementById("bgMusic");
-            music.play();
-            document.getElementById('music-btn').style.display = 'flex';
+        // FUNGSI BUKA
+        function bukaSekarang() {
+            document.getElementById('cover-layar').style.transform = 'translateY(-100%)';
+            document.body.classList.remove('overflow-hidden');
+            document.getElementById('konten').classList.remove('opacity-0');
+            document.getElementById('btn-musik').style.display = 'flex';
+            
+            var lagu = document.getElementById("lagu");
+            lagu.play().catch(function(error) {
+                console.log("Musik butuh interaksi user pertama kali.");
+            });
         }
 
-        // Ambil Nama Tamu dari URL (?to=Nama)
-        const urlParams = new URLSearchParams(window.location.search);
-        const guest = urlParams.get('to');
-        if (guest) { document.getElementById('guestNameCover').innerText = guest; }
+        // AMBIL NAMA TAMU
+        const params = new URLSearchParams(window.location.search);
+        const tamu = params.get('to');
+        if (tamu) { document.getElementById('nama-tamu').innerText = tamu; }
 
-        // Kontrol Musik
-        const music = document.getElementById("bgMusic");
-        function toggleMusic() {
-            if (music.paused) { music.play(); document.getElementById("music-btn").innerText = "⏸"; }
-            else { music.pause(); document.getElementById("music-btn").innerText = "🎵"; }
+        // KONTROL MUSIK
+        function aturMusik() {
+            var lagu = document.getElementById("lagu");
+            var btn = document.getElementById("btn-musik");
+            if (lagu.paused) { lagu.play(); btn.innerText = "⏸"; } 
+            else { lagu.pause(); btn.innerText = "🎵"; }
         }
-
-        // Hitung Mundur
-        const weddingDate = new Date("April 5, 2026 08:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const d = weddingDate - now;
-            document.getElementById("days").innerText = Math.floor(d / 86400000);
-            document.getElementById("hours").innerText = Math.floor((d % 86400000) / 3600000);
-            document.getElementById("minutes").innerText = Math.floor((d % 3600000) / 60000);
-            document.getElementById("seconds").innerText = Math.floor((d % 60000) / 1000);
-        }, 1000);
-
-        // Munculkan elemen saat scroll
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) reveals[i].classList.add("active");
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal();
     </script>
 </body>
 </html>
