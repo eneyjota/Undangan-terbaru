@@ -3,215 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopee Wedding: Dadan & Minah</title>
+    <title>Undangan Pernikahan: Bride & Groom</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #f5f5f5; color: #333; margin-bottom: 80px; }
-        .shopee-orange { background-color: #ee4d2d; }
-        .shopee-text { color: #ee4d2d; }
-        .card { background: white; border-radius: 8px; margin: 12px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-        
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: white; display: flex; justify-content: space-around;
-            padding: 10px 0; border-top: 1px solid #ddd; z-index: 1000;
-        }
-        .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: #666; cursor: pointer; }
-        .nav-item.active { color: #ee4d2d; }
-        .nav-item i { font-size: 20px; margin-bottom: 4px; }
+        /* Definisi Font Kustom */
+        .font-serif-header { font-family: 'Cinzel', serif; } /* Untuk Judul & Nama Besar */
+        .font-script { font-family: 'Great Vibes', cursive; } /* Untuk Aksen & "The Wedding Of" */
+        .font-body { font-family: 'Poppins', sans-serif; } /* Untuk Teks Isi */
 
+        /* Warna Kustom */
+        :root {
+            --maroon-bg: #800000; /* Merah Marun Latar */
+            --maroon-text: #600000; /* Merah Marun Teks di latar terang */
+            --gold: #D4AF37; /* Emas */
+            --cream: #FFFDD0; /* Krem/Broken White */
+        }
+
+        body {
+            background-color: var(--maroon-bg);
+            color: var(--gold);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Gaya Ornamen */
+        .ornamen-bunga-maroon {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNDMTlBMTkiIGZpbGwtb3BhY2l0eT0iMC4wNyI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4='); /* Contoh pola floral transparan */
+            background-repeat: repeat;
+            opacity: 0.1;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        /* Kelas Transisi & Reveal */
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Jendela Penutup (Cover) */
         #cover {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #ee4d2d; color: white; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 10001;
-            transition: transform 0.8s ease-in-out;
+            background-color: var(--maroon-bg);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 10000; transition: transform 1s ease-in-out;
+            text-align: center;
         }
-        .shopee-logo-white { font-size: 80px; margin-bottom: 20px; border: 5px solid white; padding: 10px 25px; border-radius: 20px; }
-
-        .history-line { border-left: 2px dashed #ee4d2d; margin-left: 20px; padding-left: 20px; position: relative; }
-        .history-dot { position: absolute; left: -7px; top: 5px; width: 12px; height: 12px; background: #ee4d2d; border-radius: 50%; }
-
-        section { display: none; }
-        section.active { display: block; }
+        
+        .btn-buka {
+            background-color: var(--gold);
+            color: var(--maroon-bg);
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 20px;
+        }
     </style>
 </head>
-<body>
+<body class="font-body">
 
     <div id="cover">
-        <div class="shopee-logo-white font-bold italic">S</div>
-        <h1 class="text-3xl font-bold mb-1">BIG WEDDING DAY</h1>
-        <h2 class="text-2xl italic font-semibold mb-4">Dadan & Minah</h2>
-        <p class="text-lg opacity-90 mb-8">05.04.2026</p>
-        <div class="bg-white text-[#ee4d2d] px-6 py-3 rounded-md font-bold text-sm shadow-xl mb-4">
-            Spesial Untuk: <span id="guestName">[ Nama Tamu ]</span>
-        </div>
-        <button onclick="openInvitation()" class="bg-yellow-400 text-black px-10 py-3 rounded-sm font-bold uppercase tracking-wider animate-bounce">Buka Paket Kebahagiaan</button>
-    </div>
+        <div class="ornamen-bunga-maroon"></div>
+        <div class="z-10 relative px-6">
+            <p class="font-script text-3xl mb-2">The Wedding of</p>
+            <h1 class="font-serif-header text-5xl md:text-7xl mb-8 tracking-wider">BRIDE & GROOM</h1>
+            
+            <div class="w-24 h-24 mx-auto mb-8 flex items-center justify-center">
+                <svg viewBox="0 0 100 100" class="w-full h-full fill-current text-[--gold]">
+                    <path d="M50 0 L100 50 L50 100 L0 50 Z M50 10 L10 50 L50 90 L90 50 Z M50 20 L20 50 L50 80 L80 50 Z" />
+                    </svg>
+            </div>
 
-    <div class="shopee-orange text-white p-4 flex justify-between items-center sticky top-0 z-50">
-        <div class="flex items-center gap-3">
-            <i class="fa-solid fa-arrow-left"></i>
-            <span class="font-bold text-lg">Detail Pernikahan</span>
-        </div>
-        <div class="flex gap-4">
-            <i class="fa-solid fa-share-nodes"></i>
-            <i class="fa-solid fa-cart-shopping"></i>
+            <p class="text-lg mb-2">Kepada Yth;</p>
+            <p class="text-lg mb-2">Bapak/Ibu/Saudara/i</p>
+            <h3 id="guestName" class="font-serif-header text-3xl font-bold mb-8">[ Nama Tamu ]</h3>
+            <button class="btn-buka" onclick="bukaUndangan()">Open Invitation</button>
         </div>
     </div>
 
-    <main>
-       
-        <section id="beranda" class="active">
-            <div class="bg-white p-8 text-center border-b">
-                <h2 class="text-2xl font-bold shopee-text italic">Dadan & Minah: New Chapter</h2>
-                <div class="bg-orange-100 text-[#ee4d2d] inline-block px-3 py-1 rounded text-xs font-bold mt-3">Event Dimulai: 05 April 2026</div>
-            </div>
-
-            <div class="card flex justify-between items-center bg-orange-50">
-                <span class="font-bold shopee-text"><i class="fa-solid fa-bolt"></i> FLASH SALE PERNIKAHAN</span>
-                <div class="flex gap-2" id="countdown">
-                    <span id="days" class="bg-black text-white px-2 py-1 rounded text-sm font-bold">00</span>
-                    <span id="hours" class="bg-black text-white px-2 py-1 rounded text-sm font-bold">00</span>
-                    <span id="minutes" class="bg-black text-white px-2 py-1 rounded text-sm font-bold">00</span>
+    <main id="main-content" class="relative z-10 hidden">
+        
+        <section class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative">
+            <div class="ornamen-bunga-maroon"></div>
+            <div class="max-w-3xl z-10 reveal">
+                <div class="w-20 h-20 mx-auto mb-8 flex items-center justify-center">
+                    <svg viewBox="0 0 100 100" class="w-full h-full fill-current text-[--gold]">
+                        <path d="M50 0 L100 50 L50 100 L0 50 Z M50 10 L10 50 L50 90 L90 50 Z M50 20 L20 50 L50 80 L80 50 Z" />
+                    </svg>
                 </div>
-            </div>
 
-            <div class="card italic text-sm text-gray-600 leading-relaxed border-l-4 border-[#ee4d2d]">
-                "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri..." (QS Ar-Rum: 21)
-            </div>
-
-            <div class="card">
-                <h3 class="font-bold border-b pb-2 mb-4"><i class="fa-solid fa-user-group shopee-text"></i> Spesifikasi Mempelai</h3>
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center border-2 border-[#ee4d2d]">
-                        <i class="fa-solid fa-user text-gray-400"></i>
-                    </div>
-                    <div>
-                        <p class="font-bold">Ahmad Ramadani (Dadan)</p>
-                        <p class="text-xs text-gray-500">Putra dari Bpk. Nanang & Ibu Jaminah</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center border-2 border-[#ee4d2d]">
-                        <i class="fa-solid fa-user text-gray-400"></i>
-                    </div>
-                    <div>
-                        <p class="font-bold">Siti Aminah (Minah)</p>
-                        <p class="text-xs text-gray-500">Putri dari Bpk. Yanto (Alm) & Ibu St. Hapsah</p>
-                    </div>
-                </div>
+                <p class="font-script text-2xl text-[--cream] mb-4">Assalamu’alaikum Wr. Wb.</p>
+                <p class="text-[--cream] leading-relaxed mb-6">Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan hadir dan memberikan do'a restu kepada kedua mempelai.</p>
+                <p class="font-serif-header text-xl text-[--gold] mb-2">Hormat Kami Yang Mengundang</p>
+                <p class="font-serif-header text-2xl font-bold tracking-widest">BRIDE & GROOM</p>
+                
+                <p class="text-sm mt-10 text-[--cream]/80">Music:<br><span class="italic">Instrumen Music Tarian Aceh</span></p>
             </div>
         </section>
 
-        <section id="lokasi">
-            <div class="card text-center">
-                <h3 class="shopee-text font-bold text-lg mb-4">ESTIMASI PENGIRIMAN DOA</h3>
-                <div class="border rounded-md p-4 mb-4 text-left">
-                    <p class="font-bold text-green-600"><i class="fa-solid fa-truck"></i> Akad Nikah</p>
-                    <p class="text-sm">Rabu, 11 Maret 2026 | 08.00 WITA</p>
-                </div>
-                <div class="border-2 border-[#ee4d2d] rounded-md p-4 text-left relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-[#ee4d2d] text-white text-[10px] px-2 py-1">UTAMA</div>
-                    <p class="font-bold shopee-text"><i class="fa-solid fa-location-dot"></i> Resepsi Pernikahan</p>
-                    <p class="text-sm font-bold">Minggu, 05 April 2026</p>
-                    <p class="text-xs text-gray-500">Desa Semisir, Kotabaru</p>
-                    <a href="https://maps.app.goo.gl/47WMJbsCAwbdKyJX9?g_st=ic" class="mt-4 block bg-[#ee4d2d] text-white text-center py-2 rounded font-bold text-sm">Lihat Lokasi</a>
-                </div>
+        <section class="py-20 bg-[--cream] text-[--maroon-text] text-center px-6 reveal">
+            <div class="w-full flex justify-center mb-10">
+                <svg width="200" height="20" viewBox="0 0 200 20" class="fill-current text-[--gold]">
+                    <rect width="10" height="10" x="0" y="5" rx="2" />
+                    <rect width="10" height="10" x="20" y="5" rx="2" />
+                    <rect width="10" height="10" x="40" y="5" rx="2" />
+                    </svg>
             </div>
+
+            <p class="font-script text-4xl mb-6">Do'a Untuk Pengantin</p>
+            <p class="max-w-2xl mx-auto italic leading-relaxed mb-6">"Semoga Allah memberkahimu di waktu bahagia dan memberkahimu di waktu susah, dan mengumpulkan kalian berdua dalam kebaikan"</p>
+            <p class="font-semibold text-sm mb-10">[HR. Abu Daud]</p>
+
+            <p class="text-sm mb-6">Tekan tombol dibawah ini untuk mengirim ucapan dan konfirmasi kehadiran</p>
+            <button class="bg-[--maroon-bg] text-[--gold] px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[--maroon-text] transition">Konfirmasi & Kirim Ucapan</button>
+
+            <div class="flex justify-between items-end mt-20 px-4 md:px-20">
+                <img src="path/to/floral_ornament_left.png" alt="" class="w-32 md:w-48"> <img src="path/to/floral_ornament_right.png" alt="" class="w-32 md:w-48"> </div>
         </section>
 
-       
-        <section id="riwayat">
-            <div class="card">
-                <h3 class="font-bold mb-6 text-lg">Riwayat Perjalanan Cinta</h3>
-                <div class="history-line">
-                    <div class="mb-8 relative">
-                        <div class="history-dot"></div>
-                        <p class="font-bold text-sm">Order Pertama Diproses</p>
-                        <p class="text-xs text-[#ee4d2d] font-bold mb-1">12 10 2023</p>
-                        <p class="text-xs text-gray-500">Sistem mendeteksi "ketertarikan awal". Status: Tahap Kenalan.</p>
-                    </div>
-                    <div class="mb-8 relative">
-                        <div class="history-dot"></div>
-                        <p class="font-bold text-sm">Sedang Dikemas (Hubungan Serius)</p>
-                        <p class="text-xs text-gray-500 mb-1">27.07.2024</p>
-                        <p class="text-xs text-gray-500">Komitmen dibangun bersama keluarga.</p>
-                    </div>
-                    <div class="relative">
-                        <div class="history-dot"></div>
-                        <p class="font-bold text-sm shopee-text">Pesanan Selesai</p>
-                        <p class="text-xs text-gray-500 mb-1">05.04.2026</p>
-                        <p class="text-xs font-semibold">Transaksi cinta berhasil! Menuju pelaminan.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section class="py-20 bg-[--cream] text-[--maroon-text] px-6">
+            <div class="max-w-5xl mx-auto reveal">
+                
+                <div class="text-center mb-20">
+                    <h3 class="font-serif-header text-3xl font-bold tracking-widest mb-10">AKAD NIKAH</h3>
+                    <p class="font-semibold">Minggu, 30 November 2025</p>
+                    <p>Pukul 08.00 WITA</p>
+                    <p class="mb-6">Masjid Jami Banjarmasin</p>
 
-        <section id="rsvp">
-            <div class="card text-center py-10">
-                <i class="fa-solid fa-envelope-open-text text-6xl shopee-text mb-6"></i>
-                <h3 class="font-bold text-xl mb-4">Konfirmasi Kehadiran</h3>
-                <a href="https://wa.me/6285787806145" target="_blank" class="bg-[#ee4d2d] text-white flex items-center justify-center gap-2 py-4 rounded-md font-bold text-lg mx-4 shadow-lg">
-                    <i class="fa-solid fa-cart-plus"></i> Konfirmasi RSVP
-                </a>
+                    <div class="w-16 h-[1px] bg-[--maroon-text]/30 mx-auto my-6"></div>
+
+                    <h3 class="font-serif-header text-3xl font-bold tracking-widest mb-10">RESEPSI</h3>
+                    <p class="font-semibold">Minggu, 30 November 2025</p>
+                    <p>Pukul 11.00 WITA - Selesai</p>
+                    <p>Lokasi Resepsi (contoh: Hotel Satu Hati)</p>
+                    
+                    <button class="mt-8 bg-[--gold] text-[--maroon-bg] px-6 py-2 rounded font-bold text-sm shadow">Add to Calendar</button>
+                </div>
+
+                <div class="text-center">
+                    <p class="font-script text-4xl mb-8">Maps</p>
+                    
+                    <div class="max-w-2xl mx-auto border-4 border-[--maroon-text] rounded-2xl p-2 bg-white shadow-xl mb-8">
+                        <div class="w-full h-80 rounded-xl overflow-hidden">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127453.33649931835!2d114.51624645229237!3d-3.321815189283307!2m3!1f0!2f0!3f0!3m2!1i1024!2i1024!4h11!3m3!1m2!1s0x2dde302a94488b39%3A0xe54350171a8f6d2e!2sBanjarmasin%2C%20Kota%20Banjarmasin%2C%20Kalimantan%20Selatan!5e0!3m2!1sid!2sid!4v1710123456789!5m2!1sid!2sid" 
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <p class="font-bold text-lg">Momen Venue</p>
+                    <p class="max-w-md mx-auto text-sm leading-relaxed mb-6">Banjarmasin, Jl. Sultan Adam No.24, RT.20/RW.08, Surgi Mufti, Kota Banjarmasin, Kalimantan Selatan</p>
+                    <a href="https://maps.app.goo.gl/xxx" target="_blank" class="inline-block bg-[--gold] text-[--maroon-bg] px-8 py-3 rounded-full font-bold shadow-lg hover:bg-yellow-500 transition">Petunjuk Ke Lokasi</a>
+                </div>
+
             </div>
         </section>
+        
+        <footer class="fixed bottom-0 left-0 right-0 h-16 bg-[--maroon-bg] border-t border-[--gold]/30 text-[--cream] flex justify-around items-center z-50">
+            <a href="#" class="flex flex-col items-center text-sm">
+                <i class="fa fa-home text-lg"></i>
+                <span>Home</span>
+            </div>
+            <a href="#" class="flex flex-col items-center text-sm">
+                <i class="fa fa-heart text-lg"></i>
+                <span>Mempelai</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-sm border-2 border-[--gold] rounded-full p-2 bg-[--gold]/20">
+                <i class="fa fa-map-marked-alt text-lg text-[--gold]"></i>
+                <span class="text-[--gold]">Lokasi</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-sm">
+                <i class="fa fa-gift text-lg"></i>
+                <span>Hadiah</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-sm">
+                <i class="fa fa-comment text-lg"></i>
+                <span>Ucapan</span>
+            </a>
+        </footer>
+
     </main>
 
-    <nav class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('beranda', this)">
-            <i class="fa-solid fa-house"></i>
-            <span>Beranda</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('lokasi', this)">
-            <i class="fa-solid fa-calendar-check"></i>
-            <span>Acara</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('riwayat', this)">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span>Riwayat</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('rsvp', this)">
-            <i class="fa-solid fa-comment-dots"></i>
-            <span>RSVP</span>
-        </div>
-    </nav>
-
-    <audio id="bgMusic" loop>
-        <source src="musik-wedding.mp3" type="audio/mpeg">
-    </audio>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script>
-        function openInvitation() {
+        // Logika Menampilkan Undangan
+        function bukaUndangan() {
             document.getElementById('cover').style.transform = 'translateY(-100%)';
-            document.getElementById('bgMusic').play();
-            setTimeout(() => { document.getElementById('cover').style.display = 'none'; }, 800);
+            document.getElementById('main-content').classList.remove('hidden');
+            document.body.style.overflow = 'auto'; // Aktifkan scroll
+            // Tambahkan logika untuk memainkan musik di sini
         }
 
-        function switchTab(tabId, el) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-            el.classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
+        // Ambil nama tamu dari URL (contoh: url?to=NamaTamu)
         const urlParams = new URLSearchParams(window.location.search);
-        const guest = urlParams.get('to');
-        if (guest) document.getElementById('guestName').innerText = guest.replace(/\+/g, ' ');
+        const guestName = urlParams.get('to');
+        if (guestName) {
+            document.getElementById('guestName').innerText = guestName;
+        }
 
-        const targetDate = new Date("April 5, 2026 08:00:00").getTime();
-        setInterval(function() {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-            if (diff > 0) {
-                document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        // Logika Reveal on Scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
             }
-        }, 1000);
+        }
+        window.addEventListener("scroll", reveal);
     </script>
 </body>
 </html>
