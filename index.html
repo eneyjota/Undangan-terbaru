@@ -13,7 +13,6 @@
         .shopee-text { color: #ee4d2d; }
         .card { background: white; border-radius: 8px; margin: 12px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
         
-        /* Navigasi Bawah Khas Shopee */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: white; display: flex; justify-content: space-around;
@@ -23,7 +22,6 @@
         .nav-item.active { color: #ee4d2d; }
         .nav-item i { font-size: 20px; margin-bottom: 4px; }
 
-        /* Splash Cover */
         #cover {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #ee4d2d; color: white; display: flex; flex-direction: column;
@@ -32,7 +30,6 @@
         }
         .shopee-logo-white { font-size: 80px; margin-bottom: 20px; border: 5px solid white; padding: 10px 25px; border-radius: 20px; }
 
-        /* Progress Bar History */
         .history-line { border-left: 2px dashed #ee4d2d; margin-left: 20px; padding-left: 20px; position: relative; }
         .history-dot { position: absolute; left: -7px; top: 5px; width: 12px; height: 12px; background: #ee4d2d; border-radius: 50%; }
 
@@ -44,8 +41,9 @@
 
     <div id="cover">
         <div class="shopee-logo-white font-bold italic">S</div>
-        <h1 class="text-3xl font-bold mb-2">BIG WEDDING DAY</h1>
-        <p class="text-xl opacity-90 mb-8">05.04.2026</p>
+        <h1 class="text-3xl font-bold mb-1">BIG WEDDING DAY</h1>
+        <h2 class="text-2xl italic font-semibold mb-4">Dadan & Minah</h2>
+        <p class="text-lg opacity-90 mb-8">05.04.2026</p>
         <div class="bg-white text-[#ee4d2d] px-6 py-3 rounded-md font-bold text-sm shadow-xl mb-4">
             Spesial Untuk: <span id="guestName">[ Nama Tamu ]</span>
         </div>
@@ -64,11 +62,11 @@
     </div>
 
     <main>
+       
         <section id="beranda" class="active">
-            <div class="bg-white p-4 text-center">
-                <img src="https://via.placeholder.com/500x300?text=Foto+Mempelai" class="w-full rounded-md mb-4 shadow-sm" alt="Mempelai">
-                <h2 class="text-xl font-bold shopee-text italic">Dadan & Minah: New Chapter</h2>
-                <div class="bg-orange-100 text-[#ee4d2d] inline-block px-3 py-1 rounded text-xs font-bold mt-2">Event Dimulai: 05 April 2026</div>
+            <div class="bg-white p-8 text-center border-b">
+                <h2 class="text-2xl font-bold shopee-text italic">Dadan & Minah: New Chapter</h2>
+                <div class="bg-orange-100 text-[#ee4d2d] inline-block px-3 py-1 rounded text-xs font-bold mt-3">Event Dimulai: 05 April 2026</div>
             </div>
 
             <div class="card flex justify-between items-center bg-orange-50">
@@ -87,23 +85,21 @@
             <div class="card">
                 <h3 class="font-bold border-b pb-2 mb-4"><i class="fa-solid fa-user-group shopee-text"></i> Spesifikasi Mempelai</h3>
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="w-16 h-16 rounded-full bg-gray-200 overflow-hidden border-2 border-[#ee4d2d]">
-                        <img src="https://via.placeholder.com/100" alt="Dadan">
+                    <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center border-2 border-[#ee4d2d]">
+                        <i class="fa-solid fa-user text-gray-400"></i>
                     </div>
                     <div>
                         <p class="font-bold">Ahmad Ramadani (Dadan)</p>
                         <p class="text-xs text-gray-500">Putra dari Bpk. Nanang & Ibu Jaminah</p>
-                        <button class="mt-1 text-[10px] bg-blue-500 text-white px-2 py-0.5 rounded">@instagram</button>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 rounded-full bg-gray-200 overflow-hidden border-2 border-[#ee4d2d]">
-                        <img src="https://via.placeholder.com/100" alt="Minah">
+                    <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center border-2 border-[#ee4d2d]">
+                        <i class="fa-solid fa-user text-gray-400"></i>
                     </div>
                     <div>
                         <p class="font-bold">Siti Aminah (Minah)</p>
                         <p class="text-xs text-gray-500">Putri dari Bpk. Yanto (Alm) & Ibu St. Hapsah</p>
-                        <button class="mt-1 text-[10px] bg-pink-500 text-white px-2 py-0.5 rounded">@instagram</button>
                     </div>
                 </div>
             </div>
@@ -113,21 +109,20 @@
             <div class="card text-center">
                 <h3 class="shopee-text font-bold text-lg mb-4">ESTIMASI PENGIRIMAN DOA</h3>
                 <div class="border rounded-md p-4 mb-4 text-left">
-                    <p class="font-bold text-green-600"><i class="fa-solid fa-truck"></i> Akad Nikah (Gratis Ongkir)</p>
+                    <p class="font-bold text-green-600"><i class="fa-solid fa-truck"></i> Akad Nikah</p>
                     <p class="text-sm">Rabu, 11 Maret 2026 | 08.00 WITA</p>
-                    <p class="text-xs text-gray-500">Jl. Poros Desa Semisir, Kotabaru</p>
                 </div>
                 <div class="border-2 border-[#ee4d2d] rounded-md p-4 text-left relative overflow-hidden">
                     <div class="absolute top-0 right-0 bg-[#ee4d2d] text-white text-[10px] px-2 py-1">UTAMA</div>
                     <p class="font-bold shopee-text"><i class="fa-solid fa-location-dot"></i> Resepsi Pernikahan</p>
                     <p class="text-sm font-bold">Minggu, 05 April 2026</p>
-                    <p class="text-sm">08.00 WITA - Selesai</p>
-                    <p class="text-xs text-gray-500">Kediaman Mempelai Wanita, Desa Semisir</p>
-                    <a href="https://maps.app.goo.gl/47WMJbsCAwbdKyJX9?g_st=ic" class="mt-4 block bg-[#ee4d2d] text-white text-center py-2 rounded font-bold text-sm">Lihat Lokasi di Maps</a>
+                    <p class="text-xs text-gray-500">Desa Semisir, Kotabaru</p>
+                    <a href="https://maps.app.goo.gl/47WMJbsCAwbdKyJX9?g_st=ic" class="mt-4 block bg-[#ee4d2d] text-white text-center py-2 rounded font-bold text-sm">Lihat Lokasi</a>
                 </div>
             </div>
         </section>
 
+       
         <section id="riwayat">
             <div class="card">
                 <h3 class="font-bold mb-6 text-lg">Riwayat Perjalanan Cinta</h3>
@@ -135,20 +130,20 @@
                     <div class="mb-8 relative">
                         <div class="history-dot"></div>
                         <p class="font-bold text-sm">Order Pertama Diproses</p>
-                        <p class="text-xs text-gray-500 mb-1">12.03.2019</p>
-                        <p class="text-xs">Sistem mendeteksi "ketertarikan awal". Status: Tahap Kenalan.</p>
+                        <p class="text-xs text-[#ee4d2d] font-bold mb-1">12 10 2023</p>
+                        <p class="text-xs text-gray-500">Sistem mendeteksi "ketertarikan awal". Status: Tahap Kenalan.</p>
                     </div>
                     <div class="mb-8 relative">
                         <div class="history-dot"></div>
                         <p class="font-bold text-sm">Sedang Dikemas (Hubungan Serius)</p>
-                        <p class="text-xs text-gray-500 mb-1">27.07.2021</p>
-                        <p class="text-xs">Komitmen dibangun. Hubungan dikemas dengan keseriusan oleh kedua belah pihak.</p>
+                        <p class="text-xs text-gray-500 mb-1">27.07.2024</p>
+                        <p class="text-xs text-gray-500">Komitmen dibangun bersama keluarga.</p>
                     </div>
                     <div class="relative">
-                        <div class="history-dot shadow-[0_0_8px_#ee4d2d]"></div>
-                        <p class="font-bold text-sm shopee-text">Pesanan Selesai (Menuju Pelaminan)</p>
+                        <div class="history-dot"></div>
+                        <p class="font-bold text-sm shopee-text">Pesanan Selesai</p>
                         <p class="text-xs text-gray-500 mb-1">05.04.2026</p>
-                        <p class="text-xs font-semibold">Transaksi cinta berhasil! Siap lanjut ke tahap pernikahan.</p>
+                        <p class="text-xs font-semibold">Transaksi cinta berhasil! Menuju pelaminan.</p>
                     </div>
                 </div>
             </div>
@@ -158,8 +153,7 @@
             <div class="card text-center py-10">
                 <i class="fa-solid fa-envelope-open-text text-6xl shopee-text mb-6"></i>
                 <h3 class="font-bold text-xl mb-4">Konfirmasi Kehadiran</h3>
-                <p class="text-sm text-gray-600 mb-8 px-4">Silakan tekan tombol di bawah ini untuk mengonfirmasi kehadiran Anda dalam "Keranjang Kebahagiaan" kami.</p>
-                <a href="https://wa.me/6285787806145?text=Halo+Dadan+dan+Minah%2C+Saya+akan+hadir+di+undangan+Shopee+kalian!" target="_blank" class="bg-[#ee4d2d] text-white flex items-center justify-center gap-2 py-4 rounded-md font-bold text-lg mx-4 shadow-lg">
+                <a href="https://wa.me/6285787806145" target="_blank" class="bg-[#ee4d2d] text-white flex items-center justify-center gap-2 py-4 rounded-md font-bold text-lg mx-4 shadow-lg">
                     <i class="fa-solid fa-cart-plus"></i> Konfirmasi RSVP
                 </a>
             </div>
@@ -197,25 +191,17 @@
         }
 
         function switchTab(tabId, el) {
-            // Sembunyikan semua section
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            // Tampilkan section yang dipilih
             document.getElementById(tabId).classList.add('active');
-            
-            // Update UI navigasi
             document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
             el.classList.add('active');
-            
-            // Scroll ke atas
             window.scrollTo(0, 0);
         }
 
-        // Ambil Nama Tamu dari URL (?to=Nama+Tamu)
         const urlParams = new URLSearchParams(window.location.search);
         const guest = urlParams.get('to');
         if (guest) document.getElementById('guestName').innerText = guest.replace(/\+/g, ' ');
 
-        // Countdown Timer Simple
         const targetDate = new Date("April 5, 2026 08:00:00").getTime();
         setInterval(function() {
             const now = new Date().getTime();
